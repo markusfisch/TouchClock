@@ -1,8 +1,8 @@
-Touch Clock
-===========
+Touch Clock for Android
+=======================
 
 A editable clock view for Android. Gives users a straight forward,
-traditional way of setting a point in time (and - optionally - a duration).
+traditional way of setting a time (and - optionally - a duration).
 
 Minnimum SDK version 4.
 
