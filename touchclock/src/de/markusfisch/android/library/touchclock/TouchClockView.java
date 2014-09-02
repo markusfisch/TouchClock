@@ -26,15 +26,15 @@ public class TouchClockView extends View
 		STOP
 	}
 
-	private static final float DOUBLE_PI = (float)Math.PI*2f;
+	private static final float TAU = (float)Math.PI*2f;
 	private static final float HALF_PI = (float)Math.PI/2f;
-	private static final float RAD_MINUTE = DOUBLE_PI/60f;
-	private static final float MINUTE_RAD = 60f/DOUBLE_PI;
-	private static final float HOUR_RAD = 12f/DOUBLE_PI;
+	private static final float RAD_MINUTE = TAU/60f;
+	private static final float MINUTE_RAD = 60f/TAU;
+	private static final float HOUR_RAD = 12f/TAU;
 	private static final float RAD_TO_DEGREE = 180f/(float)Math.PI;
-	private static final float MPH_PER_RAD = 720f/DOUBLE_PI;
-	private static final float RAD_PER_MPH = DOUBLE_PI/720f;
-	private static final float RAD_PER_5MPH = DOUBLE_PI/144f;
+	private static final float MPH_PER_RAD = 720f/TAU;
+	private static final float RAD_PER_MPH = TAU/720f;
+	private static final float RAD_PER_5MPH = TAU/144f;
 
 	public boolean useDuration = true;
 	public int markColor = 0xff0099cc;
@@ -262,7 +262,7 @@ public class TouchClockView extends View
 							float a = c-hourLastAngle;
 							final float r = Math.abs( a );
 
-							if( DOUBLE_PI-r < r )
+							if( TAU-r < r )
 								a = -a;
 
 							if( (a > 0 && hourLastAngle > c) ||
@@ -289,7 +289,7 @@ public class TouchClockView extends View
 							float a = c-minuteLastAngle;
 							final float r = Math.abs( a );
 
-							if( DOUBLE_PI-r < r )
+							if( TAU-r < r )
 								a = -a;
 
 							if( a > 0 && minuteLastAngle > c )
@@ -378,7 +378,7 @@ public class TouchClockView extends View
 		float a = 0;
 
 		for( int n = 0;
-			a < DOUBLE_PI;
+			a < TAU;
 			a += RAD_MINUTE, ++n )
 		{
 			final float cos = (float)Math.cos( a );
@@ -459,10 +459,10 @@ public class TouchClockView extends View
 	private static float getAngleDifference( float a )
 	{
 		while( a < 0 )
-			a += DOUBLE_PI;
+			a += TAU;
 
-		while( a > DOUBLE_PI )
-			a -= DOUBLE_PI;
+		while( a > TAU )
+			a -= TAU;
 
 		return a;
 	}
