@@ -1,4 +1,4 @@
-package de.markusfisch.android.view.touchclock;
+package de.markusfisch.android.library.touchclock;
 
 import android.content.Context;
 import android.graphics.Bitmap;
