@@ -1,4 +1,4 @@
-package de.markusfisch.android.library.touchclock;
+package de.markusfisch.android.view.touchclock;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -173,6 +173,7 @@ public class TouchClockView extends View
 		hour.color = hourColor;
 		minute.color = minuteColor;
 		stop.color = stopColor;
+		stop.handleOnly = true;
 
 		handPaint.setStyle( Paint.Style.STROKE );
 		handPaint.setStrokeWidth( dp*2f );
@@ -198,15 +199,27 @@ public class TouchClockView extends View
 
 		if( useDuration )
 		{
-			final float d = getAngleDifference(
+			final float a = hour.angle*RAD_TO_DEGREE;
+			float d = getAngleDifference(
 				stop.angle-hour.angle );
+
+			d *= RAD_TO_DEGREE;
 
 			c.drawArc(
 				stopRect,
-				hour.angle*RAD_TO_DEGREE,
-				d*RAD_TO_DEGREE,
+				a,
+				d,
 				true,
 				durationPaint );
+
+			handPaint.setStyle( Paint.Style.STROKE );
+			handPaint.setColor( stop.color );
+			c.drawArc(
+				stopRect,
+				a,
+				d,
+				false,
+				handPaint );
 		}
 
 		hour.draw( c );
@@ -485,20 +498,25 @@ public class TouchClockView extends View
 		public float angle;
 		public float length;
 		public int color;
+		public boolean handleOnly = false;
 
 		public void draw( Canvas c )
 		{
 			x = centerX+length*(float)Math.cos( angle );
 			y = centerY+length*(float)Math.sin( angle );
 
-			handPaint.setStyle( Paint.Style.STROKE );
 			handPaint.setColor( color );
-			c.drawLine(
-				centerX,
-				centerY,
-				x,
-				y,
-				handPaint );
+
+			if( !handleOnly )
+			{
+				handPaint.setStyle( Paint.Style.STROKE );
+				c.drawLine(
+					centerX,
+					centerY,
+					x,
+					y,
+					handPaint );
+			}
 
 			handPaint.setStyle( Paint.Style.FILL );
 			c.drawCircle(
