@@ -8,7 +8,7 @@ Minnimum SDK version 4.
 
 ![Screenshot](http://markusfisch.github.io/TouchClock/screenshot.png)
 
-See TouchClockSample for a sample implementation.
+See sample branch and directory for a sample implementation.
 
 Features
 --------
